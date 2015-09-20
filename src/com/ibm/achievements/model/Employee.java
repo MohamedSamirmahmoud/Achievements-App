@@ -1,7 +1,12 @@
 package com.ibm.achievements.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -39,15 +44,18 @@ public class Employee implements Serializable {
 			@JoinColumn(name="ACHIEVEMENTID")
 			}
 		)
+	@JsonBackReference
 	private List<Achievement> achievements;
 
 	//bi-directional many-to-one association to Employee
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEEMANAGERID")
-	private Employee employee;
+	private Employee manager;
 
 	//bi-directional many-to-one association to Employee
-	@OneToMany(mappedBy="employee")
+	@JsonBackReference
+	@OneToMany(mappedBy="manager")
 	private List<Employee> employees;
 
 	public Employee() {
@@ -109,12 +117,12 @@ public class Employee implements Serializable {
 		this.achievements = achievements;
 	}
 
-	public Employee getEmployee() {
-		return this.employee;
+	public Employee getManager() {
+		return this.manager;
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setManager(Employee manager) {
+		this.manager = manager;
 	}
 
 	public List<Employee> getEmployees() {
@@ -127,14 +135,14 @@ public class Employee implements Serializable {
 
 	public Employee addEmployee(Employee employee) {
 		getEmployees().add(employee);
-		employee.setEmployee(this);
+		employee.setManager(this);
 
 		return employee;
 	}
 
 	public Employee removeEmployee(Employee employee) {
 		getEmployees().remove(employee);
-		employee.setEmployee(null);
+		employee.setManager(null);
 
 		return employee;
 	}

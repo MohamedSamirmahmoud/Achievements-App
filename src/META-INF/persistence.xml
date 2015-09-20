@@ -25,7 +25,7 @@
 			<property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:db2://9.172.5.96:50000/T2" />
 			<property name="javax.persistence.jdbc.user" value="db2admin" />
-			<property name="javax.persistence.jdbc.password" value="db2admin1" />
+			<property name="javax.persistence.jdbc.password" value="db2admin2" />
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />
 		</properties>
 	</persistence-unit>

@@ -22,7 +22,7 @@ public class EnablementCustomer implements Serializable {
 
 	//uni-directional one-to-one association to Enablement
 	@OneToOne
-	@JoinColumn(name="ACHIEVEMENTID")
+	@JoinColumn(name="ACHIEVEMENTID", insertable=false , updatable=false)
 	private Enablement enablement;
 
 	public EnablementCustomer() {

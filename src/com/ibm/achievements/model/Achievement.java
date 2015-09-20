@@ -1,7 +1,12 @@
 package com.ibm.achievements.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,8 +40,9 @@ public class Achievement implements Serializable {
 	private String status;
 
 	//bi-directional many-to-many association to Employee
+	@JsonManagedReference
 	@ManyToMany(mappedBy="achievements")
-	private List<Employee> employees;
+	private List<Employee> employees = new ArrayList<Employee>();
 
 	public Achievement() {
 	}
