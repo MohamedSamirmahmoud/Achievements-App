@@ -4,6 +4,11 @@ import java.io.IOException;
 
 
 
+
+
+
+
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -31,11 +36,7 @@ public class MentorShipCRUD extends AchievementCRUD {
 			mentorship.setTypeOfMentorship(jsonObject.get("typeOfMentorship")
 					.toString());
 			mentorship.setDescription(jsonObject.getString("description"));
-			Class classDefenation = Class.forName("com.ibm.achievements.crud."
-					+ mentorship.getTypeOfMentorship() + "CRUD");
 			
-			
-
 			final String PERSISTENT_UNIT_NAME = "Achievements-App";
 			final EntityManagerFactory factory = Persistence
 					.createEntityManagerFactory(PERSISTENT_UNIT_NAME);
@@ -44,11 +45,22 @@ public class MentorShipCRUD extends AchievementCRUD {
 			entityManager.persist(mentorship);
 			entityManager.getTransaction().commit();
 			entityManager.close();
+			Class classDefenation = Class.forName("com.ibm.achievements.crud."
+					+ mentorship.getTypeOfMentorship() + "CRUD");
+			MentorshipTypesCRUDI mentorshipTypesCRUDI = (MentorshipTypesCRUDI) classDefenation.newInstance() ; 
+			mentorshipTypesCRUDI.addMentorship(mentorship, jsonObject) ;
+			
 			return true;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -74,14 +86,28 @@ public class MentorShipCRUD extends AchievementCRUD {
 			query.executeUpdate();
 			em.getTransaction().commit();
 			em.close();
+			Class classDefenation = Class.forName("com.ibm.achievements.crud."
+					+ achievementJson.get("TypeOfMentorShip").toString() + "CRUD");
+			MentorshipTypesCRUDI mentorshipTypesCRUDI = (MentorshipTypesCRUDI) classDefenation.newInstance() ; 
+			mentorshipTypesCRUDI.updateMentorship(achievementJson) ;
+			
 			return true;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			em.close();
 			return false;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
+      return false ;
 	}
 
 	@Override
@@ -95,22 +121,23 @@ public class MentorShipCRUD extends AchievementCRUD {
 				.createQuery("SELECT m  FROM MentorShip m WHERE m.achievementId=:achievementId");
 		query.setParameter("achievementid", achievement.getAchievementId());
 		Mentorship mentorship = (Mentorship) query.getSingleResult();
-		mentorship.setAchievement(achievement);
-		JSONObject jsonObject = new JSONObject();
-		ObjectMapper mapper= new ObjectMapper();
+		Class classDefenation;
 		try {
-			  return mapper.writeValueAsString(mentorship) ;
-		 }catch (JsonGenerationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		return null;
+			classDefenation = Class.forName("com.ibm.achievements.crud."
+					+ mentorship.getTypeOfMentorship() + "CRUD");
+			MentorshipTypesCRUDI mentorshipTypesCRUDI = (MentorshipTypesCRUDI) classDefenation.newInstance() ; 
+			return mentorshipTypesCRUDI.getAchievement(mentorship.getAchievementId()+"") ;
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null ;
 	}
 	
 
