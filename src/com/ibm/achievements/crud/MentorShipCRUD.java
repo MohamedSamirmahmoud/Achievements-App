@@ -112,7 +112,6 @@ public class MentorShipCRUD extends AchievementCRUD {
 
 	@Override
 	public String getAchievement(Achievement achievement) {
-		// TODO Auto-generated method stub
 		final String PERSISTENCE_UNIT_NAME = "Achievements-App";
 		final EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);

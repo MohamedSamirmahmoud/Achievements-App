@@ -24,7 +24,7 @@ public class MentorshipSkill implements Serializable {
 
 	//uni-directional one-to-one association to Mentorship
 	@OneToOne
-	@JoinColumn(name="ACHIEVEMENTID")
+	@JoinColumn(name="ACHIEVEMENTID", insertable=false , updatable=false)
 	private Mentorship mentorship;
 
 	public MentorshipSkill() {

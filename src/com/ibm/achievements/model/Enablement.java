@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Enablement.findAll", query="SELECT e FROM Enablement e")
+@NamedQuery(name=".findAll", query="SELECT e FROM Enablement e")
 public class Enablement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +31,7 @@ public class Enablement implements Serializable {
 
 	//uni-directional one-to-one association to Achievement
 	@OneToOne
-	@JoinColumn(name="ACHIEVEMENTID")
+	@JoinColumn(name="ACHIEVEMENTID", insertable=false , updatable=false)
 	private Achievement achievement;
 
 	public Enablement() {

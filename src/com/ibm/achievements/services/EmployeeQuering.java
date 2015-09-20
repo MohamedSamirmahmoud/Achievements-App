@@ -25,6 +25,7 @@ public class EmployeeQuering {
 	@Path("/getAllEmployee")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String hello(@PathParam("test") String test) {
+		System.out.println("Hello");
 		String PERSISTENCE_UNIT_NAME = "Achievements-App";
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);

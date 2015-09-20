@@ -23,7 +23,7 @@ public class Disclosure implements Serializable {
 
 	//uni-directional one-to-one association to Achievement
 	@OneToOne
-	@JoinColumn(name="ACHIEVEMENTID")
+	@JoinColumn(name="ACHIEVEMENTID", insertable=false , updatable=false)
 	private Achievement achievement;
 
 	public Disclosure() {

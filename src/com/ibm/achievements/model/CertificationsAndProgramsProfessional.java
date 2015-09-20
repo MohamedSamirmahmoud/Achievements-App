@@ -22,7 +22,7 @@ public class CertificationsAndProgramsProfessional implements Serializable {
 
 	//uni-directional one-to-one association to CertificationsAndProgram
 	@OneToOne
-	@JoinColumn(name="ACHIEVEMENTID")
+	@JoinColumn(name="ACHIEVEMENTID" , insertable=false , updatable=false)
 	private CertificationsAndProgram certificationsandprogram;
 
 	public CertificationsAndProgramsProfessional() {
