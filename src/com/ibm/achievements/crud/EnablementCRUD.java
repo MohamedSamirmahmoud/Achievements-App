@@ -32,6 +32,7 @@ public class EnablementCRUD extends AchievementCRUD{
 			enablement.setAchievementId(achievement.getAchievementId());
 		    enablement.setBusUnit(jsonObject.get("busUnit").toString());
 		    enablement.setDuration(jsonObject.get("duration").toString());
+		    enablement.setEvent(jsonObject.get("event").toString());
 		    enablement.setNumberOfAttendants(Integer.valueOf(jsonObject.get("numberOfAttendants").toString()));
 		    enablement.setTitle(jsonObject.getString("title").toString());
 		    enablement.setTypeOfEnablement(jsonObject.get("TypeOfEnablement").toString());
@@ -60,9 +61,10 @@ public class EnablementCRUD extends AchievementCRUD{
 				.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
  		EntityManager entityManger = factory.createEntityManager();
  		entityManger.getTransaction().begin();
- 		Query query =  entityManger.createQuery("UPDATE Enablement e SET e.busUnit= :busUnit, e.duration= :duration, e.numberOfAttendants=:numberOfAttendants, e.title=:title, e.typeOfEnablement=:typeOfEnablement where e.achievementId= :achievementId");
+ 		Query query =  entityManger.createQuery("UPDATE Enablement e SET e.busUnit= :busUnit, e.duration= :duration, e.event=:event ,e.numberOfAttendants=:numberOfAttendants, e.title=:title, e.typeOfEnablement=:typeOfEnablement where e.achievementId= :achievementId");
  	    query.setParameter("busUnit",achievementJson.get("busUnit").toString());
  	    query.setParameter("duration", achievementJson.get("duration").toString());
+ 	    query.setParameter("event", achievementJson.get("event").toString());
  	    query.setParameter("numberOfAttendants", Integer.valueOf(achievementJson.get("numberOfAttendants").toString()));
  	    query.setParameter("title", achievementJson.get("title").toString());
  	    query.setParameter("typeOfEnablement", achievementJson.get("typeOfEnablement").toString());

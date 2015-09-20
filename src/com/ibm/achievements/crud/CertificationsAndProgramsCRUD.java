@@ -25,8 +25,7 @@ public class CertificationsAndProgramsCRUD extends AchievementCRUD {
 			CertificationsAndProgram certificationsAndProgram = new CertificationsAndProgram();
 			certificationsAndProgram.setAchievementId(Integer
 					.valueOf(jsonObject.get("Achievementid").toString()));
-			certificationsAndProgram.setTypeOfCertification(jsonObject.get(
-					"TypeOfCertification").toString());
+			certificationsAndProgram.setTypeOfCertification(jsonObject.get("TypeOfCertification").toString());
 			certificationsAndProgram.setAchievement(achievement);
 			final String PERSISTENT_UNIT_NAME = "Achievements-App";
 			final EntityManagerFactory factory = Persistence

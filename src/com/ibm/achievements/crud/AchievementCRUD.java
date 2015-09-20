@@ -142,6 +142,8 @@ public abstract class AchievementCRUD {
 	    query.setParameter("managerId", Integer.valueOf(managerId)) ;
 	    List<Achievement> achievements = query.getResultList();
 		return  achievements;
+		
 	}    
+	
 	
 }

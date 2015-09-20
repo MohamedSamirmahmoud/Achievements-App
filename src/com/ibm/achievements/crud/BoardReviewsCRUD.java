@@ -27,10 +27,10 @@ public class BoardReviewsCRUD extends AchievementCRUD {
 			BoardReview boardReview = new BoardReview();
 			boardReview.setAchievement(achievement);
 			boardReview.setAchievementId(achievement.getAchievementId());
-			boardReview.setFlag(Integer.valueOf(jsonObject.get("flag")
-					.toString()));
-			boardReview.setTypeOfCertificate(jsonObject
-					.get("typeOfCertificate").toString());
+			boardReview.setFlag(Integer.valueOf(jsonObject.get("flag").toString()));
+			boardReview.setTypeOfCertificate(jsonObject.get("typeOfCertificate").toString());
+			boardReview.setReviewType(jsonObject.get("reviewType").toString());
+			boardReview.setBoardReviewLevel(jsonObject.get("boardReviewLevel").toString());
 			final String PERSISTENT_UNIT_NAME = "Achievements-App";
 			final EntityManagerFactory factory = Persistence
 					.createEntityManagerFactory(PERSISTENT_UNIT_NAME);
@@ -56,10 +56,12 @@ public class BoardReviewsCRUD extends AchievementCRUD {
 			final EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENT_UNIT_NAME);
 			EntityManager entityManager = factory.createEntityManager();
 			entityManager.getTransaction().begin();
-			Query query =  entityManager.createQuery("UPDATE BroadReview Br SET Br.flag=:flag, Br.typeOfCertificate=:typeOfCertificate  where Br.achievementId= :achievementId");
+			Query query =  entityManager.createQuery("UPDATE BroadReview Br SET Br.flag=:flag, Br.typeOfCertificate=:typeOfCertificate ,Br.reviewType=:reviewType ,Br.boardReviewLevel=:boardReviewLevel  where Br.achievementId= :achievementId");
 			BoardReview boardReview = new BoardReview();
 			boardReview.setFlag(Integer.valueOf(achievementJson.get("flag").toString()));
 			boardReview.setTypeOfCertificate(achievementJson.get("typeOfCertificate").toString());
+			boardReview.setReviewType(achievementJson.get("reviewType").toString());
+			boardReview.setBoardReviewLevel(achievementJson.get("boardReviewLevel").toString());
 			query.setParameter("achievementId", Integer.valueOf(achievementJson.get("achievementId").toString()));
 		 	query.executeUpdate();
 		 	entityManager.getTransaction().commit();
