@@ -3,13 +3,8 @@ package com.ibm.achievements.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the CERTIFICATIONSANDPROGRAMSPRODUCT database table.
- * 
- */
 @Entity
-@NamedQuery(name="CertificationsAndProgramsProduct.findAll", query="SELECT c FROM CertificationsAndProgramsProduct c")
+@NamedQuery(name = "CertificationsAndProgramsProduct.findAll", query = "SELECT c FROM CertificationsAndProgramsProduct c")
 public class CertificationsAndProgramsProduct implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,12 +17,12 @@ public class CertificationsAndProgramsProduct implements Serializable {
 
 	private String certificationExam;
 
-	@Column(name="PRODUCT_NAME")
+	@Column(name = "PRODUCT_NAME")
 	private String productName;
 
-	//uni-directional one-to-one association to CertificationsAndProgram
+	// uni-directional one-to-one association to CertificationsAndProgram
 	@OneToOne
-	@JoinColumn(name="ACHIEVEMENTID")
+	@JoinColumn(name = "ACHIEVEMENTID")
 	private CertificationsAndProgram certificationsandprogram;
 
 	public CertificationsAndProgramsProduct() {
@@ -77,7 +72,8 @@ public class CertificationsAndProgramsProduct implements Serializable {
 		return this.certificationsandprogram;
 	}
 
-	public void setCertificationsandprogram(CertificationsAndProgram certificationsandprogram) {
+	public void setCertificationsandprogram(
+			CertificationsAndProgram certificationsandprogram) {
 		this.certificationsandprogram = certificationsandprogram;
 	}
 

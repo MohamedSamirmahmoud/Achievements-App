@@ -28,6 +28,10 @@ public class HighImpactAssetCRUD extends AchievementCRUD {
 				highImpactAsset.setAchievement(achievement);
 				highImpactAsset.setAchievementId(achievement.getAchievementId());
 				highImpactAsset.setTypeOfAsset(jsonObject.get("typePfAsset").toString());
+				highImpactAsset.setBrand(jsonObject.getString("brand"));
+				highImpactAsset.setDescription(jsonObject.getString("description"));
+				highImpactAsset.setHighImpactAssetName(jsonObject.getString("highImpactAssetName"));
+				highImpactAsset.setTypeOfAsset2(jsonObject.getString("typeOfAsset2"));
 				final String PERSISTENT_UNIT_NAME= "Achievements-App" ; 
 				final EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENT_UNIT_NAME) ;
 				EntityManager entityManager = factory.createEntityManager() ; 
@@ -53,8 +57,12 @@ public class HighImpactAssetCRUD extends AchievementCRUD {
 				.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
  		EntityManager em = factory.createEntityManager();
  		em.getTransaction().begin();
- 		Query query= em.createQuery("UPDATE HighImpactAsset h SET h.typeOfAsset=:typeOfAsset where h.achievementId= :achievementId");
+ 		Query query= em.createQuery("UPDATE HighImpactAsset h SET h.typeOfAsset=:typeOfAsset , h.brand=:brand , h.description=:description , h.highImpactAssetName=:highImpactAssetName , h.typeOfAsset2=:typeOfAsset2 where h.achievementId= :achievementId");
  		query.setParameter("typeOfAsset", achievementJson.get("typeOfAsset").toString());
+ 		query.setParameter("brand", Integer.valueOf(achievementJson.get("brand").toString()));
+ 		query.setParameter("description", Integer.valueOf(achievementJson.get("description").toString()));
+ 		query.setParameter("highImpactAssetName", Integer.valueOf(achievementJson.get("highImpactAssetName").toString()));
+ 		query.setParameter("typeOfAsset2", Integer.valueOf(achievementJson.get("typeOfAsset2").toString()));
  		query.setParameter("achievementId", Integer.valueOf(achievementJson.get("achievementId").toString()));
  		query.executeUpdate();
 		em.getTransaction().commit();

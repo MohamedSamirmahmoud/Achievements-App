@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="Achievements-App">
+		<mapping-file>META-INF/orm.xml</mapping-file>
 		<class>com.ibm.achievements.model.Achievement</class>
 		<class>com.ibm.achievements.model.BoardReview</class>
 		<class>com.ibm.achievements.model.CertificationsAndProgram</class>
@@ -20,5 +21,12 @@
 		<class>com.ibm.achievements.model.RevenueInfelunce</class>
 		<class>com.ibm.achievements.model.SpeakingOrganizingEvent</class>
 		<class>com.ibm.achievements.model.SuccessStory</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:db2://9.172.5.96:50000/T2" />
+			<property name="javax.persistence.jdbc.user" value="db2admin" />
+			<property name="javax.persistence.jdbc.password" value="db2admin1" />
+			<property name="eclipselink.ddl-generation.output-mode" value="database" />
+		</properties>
 	</persistence-unit>
 </persistence>

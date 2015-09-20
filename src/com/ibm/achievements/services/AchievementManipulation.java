@@ -48,7 +48,7 @@ public class AchievementManipulation {
 				.addBaseAchievement(achievementJson);
 		JSONObject jsonObject = new JSONObject();
 		try {
-			Class classDefinition = Class.forName("com.ibm.achievements.dao."
+			Class classDefinition = Class.forName("com.ibm.achievements.crud."
 					+ achievement.getAchievementType() + "CRUD");
 			AchievementCRUD achievementCRUD = (AchievementCRUD) classDefinition
 					.newInstance();
@@ -75,7 +75,7 @@ public class AchievementManipulation {
 		try {
 			JSONObject jsonObject2 = new JSONObject(achievementJson);
 			
-			Class clasDefinition = Class.forName("com.ibm.achievements.dao."
+			Class clasDefinition = Class.forName("com.ibm.achievements.crud."
 					+ jsonObject2.get("type").toString() + "CRUD");
 			AchievementCRUD achievementCRUD = (AchievementCRUD) clasDefinition
 					.newInstance();

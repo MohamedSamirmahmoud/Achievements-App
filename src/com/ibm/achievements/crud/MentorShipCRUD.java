@@ -3,6 +3,7 @@ import java.io.IOException;
 
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -29,6 +30,11 @@ public class MentorShipCRUD extends AchievementCRUD {
 			mentorship.setAchievementId(achievement.getAchievementId());
 			mentorship.setTypeOfMentorship(jsonObject.get("typeOfMentorship")
 					.toString());
+			mentorship.setDescription(jsonObject.getString("description"));
+			Class classDefenation = Class.forName("com.ibm.achievements.crud."
+					+ mentorship.getTypeOfMentorship() + "CRUD");
+			
+			
 
 			final String PERSISTENT_UNIT_NAME = "Achievements-App";
 			final EntityManagerFactory factory = Persistence
@@ -40,6 +46,9 @@ public class MentorShipCRUD extends AchievementCRUD {
 			entityManager.close();
 			return true;
 		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -56,11 +65,9 @@ public class MentorShipCRUD extends AchievementCRUD {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
 		Query query = em
-				.createQuery("UPDATE Mentorship a SET a.TypeOfMentorShip= :type, a.achievement= :achiev where a.achievementId= :achievementId" );
+				.createQuery("UPDATE Mentorship a SET a.TypeOfMentorShip= :type where a.achievementId= :achievementId" );
 		try {
 			query.setParameter("type", achievementJson.get("TypeOfMentorShip")
-					.toString());
-			query.setParameter("achiev", achievementJson.get("achievement")
 					.toString());
 	 		query.setParameter("achievementId", Integer.valueOf(achievementJson.get("achievementId").toString()));
 
@@ -103,9 +110,8 @@ public class MentorShipCRUD extends AchievementCRUD {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		     
-				
 		return null;
 	}
+	
 
 }
