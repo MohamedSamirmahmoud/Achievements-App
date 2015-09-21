@@ -46,6 +46,7 @@ public class EmployeeQuering {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getEmployeesInTheSameTeam(
 			@FormParam("employeeId") String employeeId) {
+		System.out.println(employeeId);
 		String PERSISTENCE_UNIT_NAME = "Achievements-App";
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);

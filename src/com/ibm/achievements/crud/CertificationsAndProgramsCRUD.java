@@ -24,8 +24,7 @@ public class CertificationsAndProgramsCRUD extends AchievementCRUD {
 		try {
 			JSONObject jsonObject = new JSONObject(achievementJson);
 			CertificationsAndProgram certificationsAndProgram = new CertificationsAndProgram();
-			certificationsAndProgram.setAchievementId(Integer
-					.valueOf(jsonObject.get("Achievementid").toString()));
+			certificationsAndProgram.setAchievementId(achievement.getAchievementId());
 			certificationsAndProgram.setTypeOfCertification(jsonObject.get("TypeOfCertification").toString());
 			certificationsAndProgram.setAchievement(achievement);
 			final String PERSISTENT_UNIT_NAME = "Achievements-App";
@@ -38,7 +37,7 @@ public class CertificationsAndProgramsCRUD extends AchievementCRUD {
 			entityManager.close();
 			try {
 				Class classDifination = Class.forName("com.ibm.achievements.crud."
-						+ jsonObject.get("TypeOfCertificationsAndPrograms").toString() + "CRUD");
+						+"CertificationsAndPrograms"+ certificationsAndProgram.getTypeOfCertification() + "CRUD");
 				CertificationAndProgramsTypesCRUDI certificationAndProgramsTypesCRUDI = (CertificationAndProgramsTypesCRUDI)classDifination.newInstance() ;
 				certificationAndProgramsTypesCRUDI.addCertificationAndPrograms(certificationsAndProgram, jsonObject) ; 				
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {

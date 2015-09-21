@@ -27,12 +27,9 @@ public class CertificationsAndProgramsProfessionalCRUD implements
 			certificationsAndProgramsProfessional
 					.setAchievementId(certificationsAndProgram
 							.getAchievementId());
-			certificationsAndProgramsProfessional
-					.setProfessionalLevel(jsonObject.getString("level"));
-			certificationsAndProgramsProfessional
-					.setProfessionalType(jsonObject
-							.getString("professionalType"));
-			String PERSISENCE_UNIT_NAME = "Achievements_App";
+			certificationsAndProgramsProfessional.setProfessionalLevel(jsonObject.getString("level"));
+			certificationsAndProgramsProfessional.setProfessionalType(jsonObject.getString("professionalType"));
+			String PERSISENCE_UNIT_NAME = "Achievements-App";
 			EntityManagerFactory entityManagerFactory = Persistence
 					.createEntityManagerFactory(PERSISENCE_UNIT_NAME);
 			EntityManager entityManager = entityManagerFactory
