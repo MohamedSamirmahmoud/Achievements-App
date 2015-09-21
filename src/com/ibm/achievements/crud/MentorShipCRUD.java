@@ -45,11 +45,12 @@ public class MentorShipCRUD extends AchievementCRUD {
 			entityManager.persist(mentorship);
 			entityManager.getTransaction().commit();
 			entityManager.close();
+			if(mentorship.getTypeOfMentorship().equals("Certification")||(mentorship.getTypeOfMentorship().equals("Skill"))){
 			Class classDefenation = Class.forName("com.ibm.achievements.crud."
-					+ mentorship.getTypeOfMentorship() + "CRUD");
+					+"Mentorship"+ mentorship.getTypeOfMentorship() + "CRUD");
 			MentorshipTypesCRUDI mentorshipTypesCRUDI = (MentorshipTypesCRUDI) classDefenation.newInstance() ; 
 			mentorshipTypesCRUDI.addMentorship(mentorship, jsonObject) ;
-			
+			}
 			return true;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -112,7 +113,6 @@ public class MentorShipCRUD extends AchievementCRUD {
 
 	@Override
 	public String getAchievement(Achievement achievement) {
-		// TODO Auto-generated method stub
 		final String PERSISTENCE_UNIT_NAME = "Achievements-App";
 		final EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);

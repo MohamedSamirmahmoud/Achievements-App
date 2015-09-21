@@ -24,6 +24,7 @@ public class MentorshipSkillCRUD implements MentorshipTypesCRUDI{
     try {
 		mentorshipSkill.setArea(mentorshipJson.getString("area"));
 		mentorshipSkill.setSkillDuration(mentorshipJson.getInt("duration"));
+		mentorshipSkill.setBrand(mentorshipJson.getString("brand"));
 		final String PERSISTENCE_UNIT_NAME = "Achievements-App"  ;
 		final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager entityManager = entityManagerFactory.createEntityManager() ; 
