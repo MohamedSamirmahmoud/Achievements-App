@@ -19,7 +19,7 @@ import com.ibm.achievements.model.MentorshipSkill;
 public class EnablementCustomerCRUD implements EnablementTypesCRUDI {
 
 	@Override
-	public boolean addMentorship(Enablement enablement,JSONObject enablementJson) {
+	public boolean addEnablement(Enablement enablement,JSONObject enablementJson) {
 		EnablementCustomer enablementCustomer=new EnablementCustomer();
 		enablementCustomer.setEnablement(enablement);
 		enablementCustomer.setAchievementId(enablement.getAchievementId());
@@ -50,8 +50,8 @@ public class EnablementCustomerCRUD implements EnablementTypesCRUDI {
 		 try {
 			 EnablementCustomer enablementCustomer = entityManager.find(EnablementCustomer.class, jsonObject.getInt("achievementId")) ;
 			entityManager.getTransaction().begin();
-			enablementCustomer.setCustomerName(jsonObject.getString("area"));
-			enablementCustomer.setCustomerType(jsonObject.getString("duration"));
+			enablementCustomer.setCustomerName(jsonObject.getString("customerName"));
+			enablementCustomer.setCustomerType(jsonObject.getString("customerType"));
 			entityManager.getTransaction().commit(); 
 	        entityManager.close();
 	        return true ; 

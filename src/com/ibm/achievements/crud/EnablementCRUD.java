@@ -3,6 +3,23 @@ import java.io.IOException;
 import java.text.ParseException;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -43,6 +60,16 @@ public class EnablementCRUD extends AchievementCRUD{
 			entityManager.persist(enablement);
 			entityManager.getTransaction().commit();
 			entityManager.close();
+			Class classDefenation;
+			try {
+				classDefenation = Class.forName("com.ibm.achievements.crud."+ enablement.getTypeOfEnablement()+ "CRUD");
+				EnablementTypesCRUDI enablementTypesCRUDI = (EnablementTypesCRUDI) classDefenation.newInstance();
+				enablementTypesCRUDI.addEnablement(enablement, jsonObject) ;
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			return true ;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -72,6 +99,17 @@ public class EnablementCRUD extends AchievementCRUD{
  		query.executeUpdate();
 		entityManger.getTransaction().commit();
 		entityManger.close();
+		Class classDefenation;
+		try {
+			classDefenation = Class.forName("com.ibm.achievements.crud."+ achievementJson.get("TypeOfEnablement").toString() + "CRUD");
+			EnablementTypesCRUDI enablementTypesCRUDI;
+			enablementTypesCRUDI = (EnablementTypesCRUDI) classDefenation.newInstance();
+			enablementTypesCRUDI.updateEnablement(achievementJson ) ; 
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
  	   return true ;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -91,20 +129,18 @@ public class EnablementCRUD extends AchievementCRUD{
 	    query.setParameter("achievementId", achievement.getAchievementId());
 	    Enablement enablement= (Enablement)query.getSingleResult();
 	    enablement.setAchievement(achievement);
-	    ObjectMapper mapper = new ObjectMapper() ;
-	     try {
-		  return mapper.writeValueAsString(enablement);
-	     }catch (JsonGenerationException e) {
+	    Class classDefenation;
+		try {
+			classDefenation = Class.forName("com.ibm.achievements.crud."+ enablement.getTypeOfEnablement() + "CRUD");
+			MentorshipTypesCRUDI mentorshipTypesCRUDI;
+            mentorshipTypesCRUDI = (MentorshipTypesCRUDI) classDefenation.newInstance();
+			
+			return mentorshipTypesCRUDI.getAchievement(enablement.getAchievementId()+"") ;
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		
 		}
+		
 		return null;
 	}
 
