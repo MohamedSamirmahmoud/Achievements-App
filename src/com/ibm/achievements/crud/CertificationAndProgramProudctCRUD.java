@@ -83,7 +83,7 @@ public class CertificationAndProgramProudctCRUD implements
 	}
 
 	@Override
-	public String certificationsAndProgram(int achievementId) {
+	public String getCertificationsAndProgram(int achievementId) {
 		final String PERSISTENCE_UNIT_NAME = "Achievements-App";
 		final EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
