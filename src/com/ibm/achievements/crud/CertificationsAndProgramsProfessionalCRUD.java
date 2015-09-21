@@ -78,7 +78,7 @@ public class CertificationsAndProgramsProfessionalCRUD implements
 	}
 
 	@Override
-	public String certificationsAndProgram(int achievementId) {
+	public String getCertificationsAndProgram(int achievementId) {
 		String PERSISENCE_UNIT_NAME = "Achievements_App";
 		EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory(PERSISENCE_UNIT_NAME);

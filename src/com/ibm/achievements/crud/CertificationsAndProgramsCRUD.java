@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.ibm.achievements.model.Achievement;
 import com.ibm.achievements.model.BoardReview;
 import com.ibm.achievements.model.CertificationsAndProgram;
@@ -35,6 +36,15 @@ public class CertificationsAndProgramsCRUD extends AchievementCRUD {
 			entityManager.persist(certificationsAndProgram);
 			entityManager.getTransaction().commit();
 			entityManager.close();
+			try {
+				Class classDifination = Class.forName("com.ibm.achievements.crud."
+						+ jsonObject.get("TypeOfCertificationsAndPrograms").toString() + "CRUD");
+				CertificationAndProgramsTypesCRUDI certificationAndProgramsTypesCRUDI = (CertificationAndProgramsTypesCRUDI)classDifination.newInstance() ;
+				certificationAndProgramsTypesCRUDI.addCertificationAndPrograms(certificationsAndProgram, jsonObject) ; 				
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return true;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -61,6 +71,15 @@ public class CertificationsAndProgramsCRUD extends AchievementCRUD {
 			query.executeUpdate();
 			entityManager.getTransaction().commit();
 			entityManager.close();
+			try {
+				Class classDifination = Class.forName("com.ibm.achievements.crud."
+						+ achievementJson.get("TypeOfCertificationsAndPrograms").toString() + "CRUD");
+				CertificationAndProgramsTypesCRUDI certificationAndProgramsTypesCRUDI = (CertificationAndProgramsTypesCRUDI)classDifination.newInstance() ;
+				certificationAndProgramsTypesCRUDI.updateCertificationAndPrograms(achievementJson) ; 				
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return true;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -83,11 +102,12 @@ public class CertificationsAndProgramsCRUD extends AchievementCRUD {
 		CertificationsAndProgram certificationandprograms = (CertificationsAndProgram) query
 				.getSingleResult();
 		certificationandprograms.setAchievement(achievement);
-		ObjectMapper mapper = new ObjectMapper();
 		try {
-			
-			return mapper.writeValueAsString(certificationandprograms);
-		} catch (IOException e) {
+			Class classDifination = Class.forName("com.ibm.achievements.crud."
+					+ certificationandprograms.getTypeOfCertification() + "CRUD");
+			CertificationAndProgramsTypesCRUDI certificationAndProgramsTypesCRUDI = (CertificationAndProgramsTypesCRUDI)classDifination.newInstance() ;
+			return certificationAndProgramsTypesCRUDI.getCertificationsAndProgram(certificationandprograms.getAchievementId()) ; 				
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
