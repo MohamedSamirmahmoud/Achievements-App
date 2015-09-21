@@ -72,7 +72,7 @@ public class CertificationsAndProgramsCRUD extends AchievementCRUD {
 			entityManager.close();
 			try {
 				Class classDifination = Class.forName("com.ibm.achievements.crud."
-						+ achievementJson.get("TypeOfCertificationsAndPrograms").toString() + "CRUD");
+						+"CertificationsAndPrograms"+ achievementJson.get("TypeOfCertificationsAndPrograms").toString() + "CRUD");
 				CertificationAndProgramsTypesCRUDI certificationAndProgramsTypesCRUDI = (CertificationAndProgramsTypesCRUDI)classDifination.newInstance() ;
 				certificationAndProgramsTypesCRUDI.updateCertificationAndPrograms(achievementJson) ; 				
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
@@ -103,7 +103,7 @@ public class CertificationsAndProgramsCRUD extends AchievementCRUD {
 		certificationandprograms.setAchievement(achievement);
 		try {
 			Class classDifination = Class.forName("com.ibm.achievements.crud."
-					+ certificationandprograms.getTypeOfCertification() + "CRUD");
+					+"CertificationsAndPrograms"+ certificationandprograms.getTypeOfCertification() + "CRUD");
 			CertificationAndProgramsTypesCRUDI certificationAndProgramsTypesCRUDI = (CertificationAndProgramsTypesCRUDI)classDifination.newInstance() ;
 			return certificationAndProgramsTypesCRUDI.getCertificationsAndProgram(certificationandprograms.getAchievementId()) ; 				
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {

@@ -27,7 +27,7 @@ public class HighImpactAssetCRUD extends AchievementCRUD {
 				HighImpactAsset highImpactAsset= new HighImpactAsset();
 				highImpactAsset.setAchievement(achievement);
 				highImpactAsset.setAchievementId(achievement.getAchievementId());
-				highImpactAsset.setTypeOfAsset(jsonObject.get("typePfAsset").toString());
+				highImpactAsset.setTypeOfAsset(jsonObject.get("typeOfAsset").toString());
 				highImpactAsset.setBrand(jsonObject.getString("brand"));
 				highImpactAsset.setDescription(jsonObject.getString("description"));
 				highImpactAsset.setHighImpactAssetName(jsonObject.getString("highImpactAssetName"));

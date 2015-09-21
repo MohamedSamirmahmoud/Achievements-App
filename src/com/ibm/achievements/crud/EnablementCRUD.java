@@ -4,22 +4,6 @@ import java.text.ParseException;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -52,7 +36,7 @@ public class EnablementCRUD extends AchievementCRUD{
 		    enablement.setEvent(jsonObject.get("event").toString());
 		    enablement.setNumberOfAttendants(Integer.valueOf(jsonObject.get("numberOfAttendants").toString()));
 		    enablement.setTitle(jsonObject.getString("title").toString());
-		    enablement.setTypeOfEnablement(jsonObject.get("TypeOfEnablement").toString());
+		    enablement.setTypeOfEnablement(jsonObject.get("typeOfEnablement").toString());
 			final String PERSISTENT_UNIT_NAME= "Achievements-App" ; 
 			final EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENT_UNIT_NAME) ;
 			EntityManager entityManager = factory.createEntityManager() ; 
@@ -60,14 +44,16 @@ public class EnablementCRUD extends AchievementCRUD{
 			entityManager.persist(enablement);
 			entityManager.getTransaction().commit();
 			entityManager.close();
+			if(jsonObject.get("typeOfEnablement").toString()=="Customer"){
 			Class classDefenation;
 			try {
-				classDefenation = Class.forName("com.ibm.achievements.crud."+ enablement.getTypeOfEnablement()+ "CRUD");
+				classDefenation = Class.forName("com.ibm.achievements.crud."+"Enablement" +enablement.getTypeOfEnablement()+ "CRUD");
 				EnablementTypesCRUDI enablementTypesCRUDI = (EnablementTypesCRUDI) classDefenation.newInstance();
 				enablementTypesCRUDI.addEnablement(enablement, jsonObject) ;
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
 			}
 			
 			return true ;
@@ -99,15 +85,17 @@ public class EnablementCRUD extends AchievementCRUD{
  		query.executeUpdate();
 		entityManger.getTransaction().commit();
 		entityManger.close();
+		if(achievementJson.get("typeOfEnablement").toString().equals("Customer")){
 		Class classDefenation;
 		try {
-			classDefenation = Class.forName("com.ibm.achievements.crud."+ achievementJson.get("TypeOfEnablement").toString() + "CRUD");
+			classDefenation = Class.forName("com.ibm.achievements.crud."+"Enablement" + achievementJson.get("TypeOfEnablement").toString() + "CRUD");
 			EnablementTypesCRUDI enablementTypesCRUDI;
 			enablementTypesCRUDI = (EnablementTypesCRUDI) classDefenation.newInstance();
 			enablementTypesCRUDI.updateEnablement(achievementJson ) ; 
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 		
  	   return true ;
@@ -129,9 +117,10 @@ public class EnablementCRUD extends AchievementCRUD{
 	    query.setParameter("achievementId", achievement.getAchievementId());
 	    Enablement enablement= (Enablement)query.getSingleResult();
 	    enablement.setAchievement(achievement);
+	    if(enablement.getTypeOfEnablement().equals("Customer")){
 	    Class classDefenation;
 		try {
-			classDefenation = Class.forName("com.ibm.achievements.crud."+ enablement.getTypeOfEnablement() + "CRUD");
+			classDefenation = Class.forName("com.ibm.achievements.crud."+"Enablement" + enablement.getTypeOfEnablement() + "CRUD");
 			MentorshipTypesCRUDI mentorshipTypesCRUDI;
             mentorshipTypesCRUDI = (MentorshipTypesCRUDI) classDefenation.newInstance();
 			
@@ -140,7 +129,7 @@ public class EnablementCRUD extends AchievementCRUD{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	    }
 		return null;
 	}
 

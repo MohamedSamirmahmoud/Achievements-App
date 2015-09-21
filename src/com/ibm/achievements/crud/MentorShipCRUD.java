@@ -88,7 +88,7 @@ public class MentorShipCRUD extends AchievementCRUD {
 			em.getTransaction().commit();
 			em.close();
 			Class classDefenation = Class.forName("com.ibm.achievements.crud."
-					+ achievementJson.get("TypeOfMentorShip").toString() + "CRUD");
+					+"Mentorship"+ achievementJson.get("TypeOfMentorShip").toString() + "CRUD");
 			MentorshipTypesCRUDI mentorshipTypesCRUDI = (MentorshipTypesCRUDI) classDefenation.newInstance() ; 
 			mentorshipTypesCRUDI.updateMentorship(achievementJson) ;
 			
@@ -124,7 +124,7 @@ public class MentorShipCRUD extends AchievementCRUD {
 		Class classDefenation;
 		try {
 			classDefenation = Class.forName("com.ibm.achievements.crud."
-					+ mentorship.getTypeOfMentorship() + "CRUD");
+					+"Mentorship"+ mentorship.getTypeOfMentorship() + "CRUD");
 			MentorshipTypesCRUDI mentorshipTypesCRUDI = (MentorshipTypesCRUDI) classDefenation.newInstance() ; 
 			return mentorshipTypesCRUDI.getAchievement(mentorship.getAchievementId()+"") ;
 		} catch (ClassNotFoundException e1) {
