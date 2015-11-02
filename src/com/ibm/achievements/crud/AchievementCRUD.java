@@ -37,7 +37,7 @@ public abstract class AchievementCRUD {
 			achievement.setComment(jsonObject.get("comment").toString());
 			achievement.setLobName(jsonObject.get("lobName").toString());
 			achievement.setStatus("Pending");
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 			Date date = dateFormat.parse(jsonObject.get("date").toString());
 			achievement.setAchievementDate(date);
 			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Achievements-App");
@@ -71,7 +71,7 @@ public abstract class AchievementCRUD {
 	public static boolean updateBaseAchievement(JSONObject AcheievementJson) {
 
 		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 			Date date = dateFormat.parse(AcheievementJson.get("date").toString());
 			final String PERSISTENCE_UNIT_NAME = "Achievements-App";
 			final EntityManagerFactory factory = Persistence

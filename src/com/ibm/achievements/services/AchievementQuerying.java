@@ -48,7 +48,7 @@ public class AchievementQuerying {
 		query.setParameter("employeeId", Integer.valueOf(employeeId));
 
 		List<Achievement> achievements = query.getResultList();
-		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setDateFormat(df);
 		try {
